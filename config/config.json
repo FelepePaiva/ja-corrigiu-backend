@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "felepe",
+    "password": "Preta1991#",
+    "database": "jacorrigiu-backend",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
