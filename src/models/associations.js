@@ -43,3 +43,9 @@ Answer.belongsTo(Student, { foreignKey: 'studentId', as: 'student' });
 Exam.hasMany(Answer, { foreignKey: 'examId', as: 'answers' });
 Answer.belongsTo(Exam, { foreignKey: 'examId', as: 'exam' });
 
+Teacher.hasMany(Exam, { foreignKey: 'teacherId' });
+Exam.belongsTo(Teacher, { foreignKey: 'teacherId' });
+
+Class.hasMany(Exam, { foreignKey: 'classId' });
+Exam.belongsTo(Class, { foreignKey: 'classId' });
+

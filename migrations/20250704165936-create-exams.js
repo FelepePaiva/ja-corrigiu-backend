@@ -29,7 +29,24 @@ export async function up(queryInterface) {
       allowNull: false,
       type: DataTypes.DATE,
       defaultValue: new Date()
+    },
+    teacherId: {
+  type: DataTypes.INTEGER,
+  allowNull: false,
+  references: {
+    model: 'teachers',
+    key: 'id',
     }
+    },
+    classId: {
+  type: DataTypes.INTEGER,
+  allowNull: false,
+  references: {
+    model: 'classes',
+    key: 'id',
+    }
+    }
+
   });
 }
 
