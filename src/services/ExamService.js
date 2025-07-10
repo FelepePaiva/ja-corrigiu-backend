@@ -39,3 +39,13 @@ export const getExamsByFilterService = async (filters) => {
         });
         return exams
 }
+export const removeExamByIdService = async (id) => {
+    
+    const exam = await Exam.findByPk(id);
+    if (!exam)
+        {
+            throw new HttpError(404, "Não foi encontrado nenhum exame com esse ID")
+        } 
+    await exam.destroy();
+    return true;
+}

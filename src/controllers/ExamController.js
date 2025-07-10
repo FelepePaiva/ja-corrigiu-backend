@@ -1,4 +1,4 @@
-import { createExamService, getExamsByFilterService } from "../services/ExamService.js"
+import { createExamService, getExamsByFilterService, removeExamByIdService } from "../services/ExamService.js"
 
 export const createExam = async (req, res, next) => {
     try 
@@ -17,5 +17,17 @@ export const getExamByFilters = async (req, res, next) => {
     catch (err)
     {
         next(err)
+    }
+}
+export const removeExamById = async (req, res, next) => {
+    try 
+    {
+        const {id} = req.params;
+        const exam = await removeExamByIdService(id);
+        res.status(204).send();
+    }
+    catch (err)
+    {
+        next(err);
     }
 }

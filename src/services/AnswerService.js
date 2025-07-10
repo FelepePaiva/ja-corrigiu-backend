@@ -45,3 +45,12 @@ export const getAnswerByStudentIdService = async (id) => {
     });
     return studentAnswers;
 }
+export const removeAnswerByIdService = async (id) => {
+    const answer = await Answer.findByPk(id);
+    if (!answer)
+    {
+        throw new HttpError(404, "Não foi encontrado nenhum cartão-resposta com esse ID");
+    }
+    await answer.destroy();
+    return true;
+}

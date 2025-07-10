@@ -1,5 +1,8 @@
 import Student from '../models/student.model.js';
 import Class from '../models/class.model.js';
+import Answer from '../models/answer.model.js'
+import {HttpError} from '../errors/HttpError.js'
+import Exam from '../models/exam.model.js';
 
 export const createStudentService = async (student) => {
     const {name, email, cpf, registration_code, classId} = student;
@@ -28,4 +31,36 @@ export const removeStudentService = async (id) => {
     }
     await existingStudent.destroy();
     return true;
+}
+export const getStudentByIdService = async (id) => {
+    const student = await Student.findByPk(id);
+
+    if (!student)
+    {
+        throw new HttpError(404, "Nenhum estudante com esse ID foi encontrado");
+    }
+    return student;
+}
+export const getAllAnswersByStudentIdService = async (id) => {
+    const student = await Student.findByPk(id)
+    if (!student)
+    {
+        throw new HttpError(404, "Não foi encontrado nenhum estudante com esse ID")
+    }
+    const answers = await Answer.findAll({
+        where: { studentId: id },
+        include: [
+            {
+                model: Exam,
+                as: 'exam',
+                attributes: ['id', 'title', 'questions_count']
+            }
+        ],
+        attributes: ['id', 'score', 'percentage', 'answers', 'examId']
+    });
+    if (!answers || answers.length === 0)
+    {
+        throw new HttpError(404, "Não foi encontrado provas com esse ID do estudante")
+    }
+    return answers;
 }

@@ -1,4 +1,4 @@
-import { createAnswerService, getAnswerByStudentIdService } from "../services/AnswerService.js"
+import { createAnswerService, getAnswerByStudentIdService, removeAnswerByIdService } from "../services/AnswerService.js"
 
 export const createAnswer = async (req, res, next) => {
 
@@ -18,6 +18,18 @@ export const  getAnswerByStudentId = async (req, res, next) => {
     {
         const answers = await getAnswerByStudentIdService(id);
         res.status(200).json(answers);
+    }
+    catch (err)
+    {
+        next(err);
+    }
+}
+export const removeAnswerById = async (req, res, next) => {
+    const {id} = req.params;
+    try 
+    {
+        const answer = await removeAnswerByIdService(id);
+        res.status(204).send();
     }
     catch (err)
     {
