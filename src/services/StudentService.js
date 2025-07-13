@@ -64,3 +64,20 @@ export const getAllAnswersByStudentIdService = async (id) => {
     }
     return answers;
 }
+export const getStudentsByClassService = async (code) => {
+    const students = await Class.findOne({
+        where: {code},
+         include: [
+      {
+        model: Student,
+        as: 'students'
+      }
+    ]
+    })
+    if (!students || (await students).length === 0)
+    {
+        throw new HttpError(404, "Não foram encontrados estudantes nessa classe")
+    }
+    return students
+
+}

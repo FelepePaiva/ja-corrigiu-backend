@@ -4,7 +4,9 @@ export const createAnswer = async (req, res, next) => {
 
     try 
     {
-        const answer = await createAnswerService(req.body);
+        const studentId = req.user.id;
+        const {examId, answers} = req.body;
+        const answer = await createAnswerService({studentId, examId, answers})
         res.status(201).json(answer);
     }
     catch(err)

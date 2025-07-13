@@ -7,6 +7,9 @@ import { errorHandler } from './middleware/error.middleware.js';
 import studentRoutes from './routes/StudentRoutes.js';
 import examRoutes from './routes/ExamRoutes.js';
 import answerRoutes from './routes/AnswerRoutes.js';
+import classRoutes from './routes/ClassRoutes.js';
+import adminRoutes from './routes/AdminRoutes.js';
+import loginRoutes from './routes/LoginRoutes.js';
 import cors from 'cors'
 
 const app = express();
@@ -18,6 +21,9 @@ app.use(cors());
 app.use('/v1', studentRoutes);
 app.use('/v1', examRoutes);
 app.use('/v1', answerRoutes);
+app.use('/v1', classRoutes);
+app.use('/v1', adminRoutes);
+app.use('/v1', loginRoutes);
 
 
 app.get('/', (req, res) => {

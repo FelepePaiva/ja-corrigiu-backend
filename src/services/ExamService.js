@@ -1,6 +1,7 @@
 import { includes } from 'zod/v4';
 import { HttpError } from '../errors/HttpError.js';
 import Exam from '../models/exam.model.js'
+import Class from '../models/class.model.js';
 
 export const createExamService = async ({title, questions_count, answer_key,
      teacherId, classId}) => {
