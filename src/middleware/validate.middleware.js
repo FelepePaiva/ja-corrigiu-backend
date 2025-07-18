@@ -4,6 +4,7 @@ export const validate = (schema, source = 'body') => (req, res, next) => {
     req[source] = parsed;
     next();
   } catch (err) {
+    console.error('Erro de validação Zod:', err);
     next(err); 
   }
 };

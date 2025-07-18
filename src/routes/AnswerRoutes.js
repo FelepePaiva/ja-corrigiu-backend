@@ -8,8 +8,10 @@ import { authorizeRole } from "../middleware/authorizeRole.middleware.js";
 
 const router = Router();
 
-router.post('/answer', validate(answerSchema), authenticateJWT, authorizeRole('student'), createAnswer);
-router.get('/answer/:id', validate(idParamSchema, 'params'), getAnswerByStudentId);
-router.delete('answer/:id', validate(idParamSchema, 'params'), removeAnswerById);
-
+    router.post('/answer', validate(answerSchema), authenticateJWT, authorizeRole('student'), createAnswer);
+    router.get('/answer/:id', validate(idParamSchema, 'params'), getAnswerByStudentId);
+    router.delete('answer/:id', validate(idParamSchema, 'params'),
+        authorizeRole(['teacher', 'admin']),
+        removeAnswerById),
+        authenticateJWT;
 export default router;

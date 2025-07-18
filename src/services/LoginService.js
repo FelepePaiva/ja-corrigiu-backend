@@ -40,5 +40,13 @@ export const loginCenterService = async ({email, password}) => {
     { expiresIn: '1h' }
     );
 
-    return { token, role };
+    return {
+        token,
+        user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role,
+        }
+    }
 }

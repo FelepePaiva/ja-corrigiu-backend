@@ -7,8 +7,8 @@ import { authorizeRole } from "../middleware/authorizeRole.middleware.js";
 
 const router = Router();
 
-router.post('/admin', validate(adminSchema),authenticateJWT, authorizeRole('admim'), 
+router.post('/admin', validate(adminSchema),authenticateJWT, authorizeRole('admin'), 
 createAdmin);
-router.get('/admin/:email', authenticateJWT, authorizeRole('admim'), getAdminByEmail);
+router.get('/admin/:email', authenticateJWT, authorizeRole('admin'), getAdminByEmail);
 
 export default router;

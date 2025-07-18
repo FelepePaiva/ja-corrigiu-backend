@@ -8,8 +8,10 @@ import studentRoutes from './routes/StudentRoutes.js';
 import examRoutes from './routes/ExamRoutes.js';
 import answerRoutes from './routes/AnswerRoutes.js';
 import classRoutes from './routes/ClassRoutes.js';
+import teacherRoutes from './routes/TeacherRoutes.js';
 import adminRoutes from './routes/AdminRoutes.js';
 import loginRoutes from './routes/LoginRoutes.js';
+import disciplineRoutes from './routes/DisciplineRoute.js';
 import cors from 'cors'
 
 const app = express();
@@ -24,6 +26,8 @@ app.use('/v1', answerRoutes);
 app.use('/v1', classRoutes);
 app.use('/v1', adminRoutes);
 app.use('/v1', loginRoutes);
+app.use('/v1', teacherRoutes);
+app.use('/v1', disciplineRoutes); 
 
 
 app.get('/', (req, res) => {
