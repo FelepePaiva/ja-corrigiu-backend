@@ -2,8 +2,12 @@ import { ZodError } from 'zod';
 import { ValidationError } from 'sequelize'; 
 
 export const errorHandler = (err, req, res, next) => {
+ // 🔍 Adicione log para depuração
+  console.error("🔥 [ERROR HANDLER] Erro capturado:", err);
 
   if (err instanceof ZodError) {
+    console.log("📦 Body recebido:", req.body);
+    console.log("📛 Tipo de classId:", typeof req.body.classId);
     return res.status(400).json({
       type: "validation",
       errors: err.errors

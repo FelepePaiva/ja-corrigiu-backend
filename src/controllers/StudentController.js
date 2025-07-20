@@ -1,6 +1,8 @@
 import { createStudentService, getAllAnswersByStudentIdService, getStudentByIdService, getStudentsByClassService, removeStudentService } from "../services/StudentService.js";
 
 export const createStudent = async (req, res, next) => {
+    console.log("[BACKEND] Requisição recebida:", req.body);
+    console.log("Tipo de classId:", typeof req.body.classId);
     try {
         const student = await createStudentService(req.body);        
         res.status(201).json(student);

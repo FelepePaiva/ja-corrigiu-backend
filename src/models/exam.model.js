@@ -11,9 +11,17 @@ const Exam = sequelize.define('Exam', {
     allowNull: false,
   },
   answer_key: {
-    type: DataTypes.JSON, // Armazena o gabarito como array, ex: ["A", "B", "C", ...]
+    type: DataTypes.JSON,
     allowNull: false,
   },
+  bimester: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      min: 1,
+      max: 4,
+    },
+  }
 }, {
   tableName: 'exams',
   timestamps: true,

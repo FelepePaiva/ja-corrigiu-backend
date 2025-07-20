@@ -65,7 +65,7 @@ export const getAllAnswersByStudentIdService = async (id) => {
     return answers;
 }
 export const getStudentsByClassService = async (code) => {
-    const students = await Class.findOne({
+    const studentsByClass = await Class.findOne({
         where: {code},
          include: [
       {
@@ -74,10 +74,10 @@ export const getStudentsByClassService = async (code) => {
       }
     ]
     })
-    if (!students || (await students).length === 0)
+    if (!studentsByClass || studentsByClass.students.length === 0)
     {
         throw new HttpError(404, "Não foram encontrados estudantes nessa classe")
     }
-    return students
+    return studentsByClass.students
 
 }

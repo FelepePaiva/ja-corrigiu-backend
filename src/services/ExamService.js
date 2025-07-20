@@ -4,13 +4,13 @@ import Exam from '../models/exam.model.js'
 import Class from '../models/class.model.js';
 
 export const createExamService = async ({title, questions_count, answer_key,
-     teacherId, classId}) => {
+     teacherId, classId, bimester}) => {
 
     if (questions_count !== answer_key.length)
     {
         throw new HttpError(400, "O número de questões e o número de resposta estão diferentes");
     }
-    const newExam = await Exam.create({title, questions_count, answer_key, teacherId, classId});
+    const newExam = await Exam.create({title, questions_count, answer_key, teacherId, classId, bimester});
     return newExam; 
 }
 export const getExamsByFilterService = async (filters) => {

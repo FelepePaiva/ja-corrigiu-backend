@@ -10,7 +10,7 @@ const router = Router();
 
 router.post('/student', validate(studentSchema, 'body'),
     authenticateJWT, 
-    authorizeRole(['teacher', 'admin']), 
+    authorizeRole('teacher', 'admin'), 
     createStudent);
 router.delete('/student/:id', validate(idParamSchema, 'params'), authenticateJWT,  removeStudent);
 router.get('/student/:id/answers', validate(idParamSchema, 'params'), authenticateJWT, getAllAnswersByStudentId);
