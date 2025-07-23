@@ -13,33 +13,33 @@ export const createExamService = async ({title, questions_count, answer_key,
     const newExam = await Exam.create({title, questions_count, answer_key, teacherId, classId, bimester});
     return newExam; 
 }
-export const getExamsByFilterService = async (filters) => {
-    const where = {};
-    const include = [];
-        if (filters.teacherId) 
-        {
-        where.teacherId = filters.teacherId;
-        }
-        if (filters.disciplineId) 
-        {
-        where.disciplineId = filters.disciplineId;
-        }
-        if (filters.className) {
-        where.class = filters.className;
-        }
-        if (filters.classCode) {
-            include.push({
-                model: Class,
-                where: {code: filters.classCode},
-                required: true
-            })
-        }
-        const exams = await Exam.findAll({
-            where,
-            include,
-        });
-        return exams
-}
+    export const getExamsByFilterService = async (filters) => {
+        const where = {};
+        const include = [];
+            if (filters.teacherId) 
+            {
+            where.teacherId = filters.teacherId;
+            }
+            if (filters.disciplineId) 
+            {
+            where.disciplineId = filters.disciplineId;
+            }
+            if (filters.className) {
+            where.class = filters.className;
+            }
+            if (filters.classCode) {
+                include.push({
+                    model: Class,
+                    where: {code: filters.classCode},
+                    required: true
+                })
+            }
+            const exams = await Exam.findAll({
+                where,
+                include,
+            });
+            return exams
+    }
 export const removeExamByIdService = async (id) => {
     
     const exam = await Exam.findByPk(id);

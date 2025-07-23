@@ -78,6 +78,6 @@ export const getStudentsByClassService = async (code) => {
     {
         throw new HttpError(404, "Não foram encontrados estudantes nessa classe")
     }
-    return studentsByClass.students
+    return studentsByClass
 
 }

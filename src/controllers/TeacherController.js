@@ -1,4 +1,4 @@
-import { createTeacherService, getAllTeacherServices, getTeacherByIdService, removeTeacherByIdService } from "../services/TeacherService.js";
+import { createTeacherService, getAllTeacherServices, getTeacherByIdClassService, getTeacherByIdService, removeTeacherByIdService } from "../services/TeacherService.js";
 
 export const createTeacher = async (req, res, next) => {
 
@@ -46,5 +46,17 @@ export const getTeacherById = async (req, res, next) => {
     catch(err)
     {
         next(err)
+    }
+}
+export const getTeacherByIdClass = async (req, res, next) => {
+    const {id} = req.params;
+    try
+    {
+        const teacherClasses = await getTeacherByIdClassService(id);
+        res.status(200).json(teacherClasses);
+    }
+    catch (err)
+    {
+        next(err);
     }
 }

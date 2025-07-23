@@ -3,6 +3,8 @@ import {HttpError} from "../errors/HttpError.js";
 import bcrypt from 'bcrypt';
 import Discipline from "../models/discipline.model.js"
 import Exam from "../models/exam.model.js";
+import Class from "../models/class.model.js";
+import { includes } from "zod/v4";
 
 export const createTeacherService = async(teacher) => {
 
@@ -69,4 +71,17 @@ export const getTeacherByIdService = async (id) => {
         throw new HttpError(404, "Não foi encontrado nenhum professor com esse ID")
     }
     return existingTeacher;
+}
+export const getTeacherByIdClassService = async (id) => {
+
+    const teacher = await Teacher.findByPk(id, {
+        include: {
+        model: Class,
+        as: 'classes',
+    }}); 
+    if (!teacher) 
+    {
+        throw new HttpError(404, "Professor não encontrado ou sem turmas")
+    }
+    return teacher.classes;
 }

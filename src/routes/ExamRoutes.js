@@ -10,7 +10,7 @@ const router = Router();
 
 router.post('/exam', validate(examSchema),
     authenticateJWT, 
-    authorizeRole(['teacher', 'admin']), 
+    authorizeRole('teacher', 'admin'), 
     createExam);
 router.get('/exam', authenticateJWT, getExamByFilters)
 router.delete('/exam/:id', validate(idParamSchema, 'params'), 
