@@ -3,7 +3,7 @@ import Answer from "../models/answer.model.js";
 import Exam from "../models/exam.model.js";
 import Student from "../models/student.model.js";
 
-export const createAnswerService = async ({studentId, examId, answers}) => {
+export const createAnswerService = async ({id, examId, answers}) => {
 
     const exam = await Exam.findByPk(examId);
     console.log("exame:", exam)
@@ -26,7 +26,7 @@ export const createAnswerService = async ({studentId, examId, answers}) => {
         answers,
         score,
         percentage,
-        studentId,
+        id,
         examId
     });
     return answer;
@@ -39,8 +39,8 @@ export const getAnswerByStudentIdService = async (id) => {
         throw new HttpError(404, "Estudante não encontrado");
     }
     const studentAnswers = await Answer.findAll({
-    where: {studentId: student.id}, attributes: ['answers', 'score', 'percentage'],
-    include: [{model: Exam, attributes: ['title']},
+    where: {id: student.id}, attributes: ['answers', 'score', 'percentage'],
+    include: [{model: Exam, attributes: ['title', 'bimester']},
 {             model: Student, attributes: ['name']}],
     });
     return studentAnswers;
@@ -54,3 +54,4 @@ export const removeAnswerByIdService = async (id) => {
     await answer.destroy();
     return true;
 }
+

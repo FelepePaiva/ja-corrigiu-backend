@@ -1,4 +1,9 @@
-import { createStudentService, getAllAnswersByStudentIdService, getStudentByIdService, getStudentsByClassService, removeStudentService } from "../services/StudentService.js";
+import { createStudentService, 
+    getAllAnswersByStudentIdService, 
+    getStudentByIdService, 
+    getStudentsByClassService, 
+    removeStudentService,
+    getAvailableExamsForStudentService } from "../services/StudentService.js";
 
 export const createStudent = async (req, res, next) => {
     console.log("[BACKEND] Requisição recebida:", req.body);
@@ -51,5 +56,17 @@ export const getStudentsByClass = async (req, res, next) => {
     catch (err)
     {
         next(err);
+    }
+}
+export const getAvailableExamsForStudent = async (req, res, next) => {
+    const {id} = req.params;
+    try
+    {
+        const exams = await getAvailableExamsForStudentService(id);
+        res.status(200).json(exams)
+    }
+    catch (err)
+    {
+        next(err)
     }
 }

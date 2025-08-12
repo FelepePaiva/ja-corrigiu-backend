@@ -12,6 +12,7 @@ import teacherRoutes from './routes/TeacherRoutes.js';
 import adminRoutes from './routes/AdminRoutes.js';
 import loginRoutes from './routes/LoginRoutes.js';
 import disciplineRoutes from './routes/DisciplineRoute.js';
+import { swaggerUi, specs } from "./swagger.js";
 import cors from 'cors'
 
 const app = express();
@@ -19,7 +20,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
-//app.use - routes
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use('/v1', studentRoutes);
 app.use('/v1', examRoutes);
 app.use('/v1', answerRoutes);

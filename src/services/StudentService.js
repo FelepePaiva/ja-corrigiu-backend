@@ -3,6 +3,7 @@ import Class from '../models/class.model.js';
 import Answer from '../models/answer.model.js'
 import {HttpError} from '../errors/HttpError.js'
 import Exam from '../models/exam.model.js';
+import { Op } from 'sequelize';
 
 export const createStudentService = async (student) => {
     const {name, email, cpf, registration_code, classId} = student;
@@ -79,5 +80,24 @@ export const getStudentsByClassService = async (code) => {
         throw new HttpError(404, "Não foram encontrados estudantes nessa classe")
     }
     return studentsByClass
-
 }
+export const getAvailableExamsForStudentService = async (id) => {
+  const studentClasses = await StudentClass.findAll({ where: { id } });
+  const classIds = studentClasses.map(sc => sc.classId);
+
+
+  const answeredExamIds = await Answer.findAll({
+    where: { id },
+    attributes: ['examId']
+  });
+  const answeredIds = answeredExamIds.map(a => a.examId);
+
+  const availableExams = await Exam.findAll({
+    where: {
+      classId: classIds,
+      id: { [Op.notIn]: answeredIds }
+    }
+  });
+
+  return availableExams;
+};
